@@ -14,7 +14,7 @@ import javax.imageio.ImageIO;
  *
  */
 public abstract class SpaceShip extends Entity {
-	protected Missile missile;		// spaceship artillery
+	protected Missile missile;	// spaceship artillery
 	protected int missileVelocity;	// missile velocity
 	
 	public SpaceShip(String path) {
@@ -38,9 +38,6 @@ public abstract class SpaceShip extends Entity {
 	 * SpaceShip object's direction.
 	 */
 	public void attack() {
-		/* if there is no missile on screen,
-		 * or it has been 1.5 seconds since last fire
-		 */
 		if (missile == null) {
 			// instantiate new missile object
 			missile = new Missile(this, getX() + (getWidth() / 2),
@@ -57,8 +54,8 @@ public abstract class SpaceShip extends Entity {
 		/* were going to pass an entity object here
 		 * and test it against the missile
 		 */
-		boolean collision = false;	// always set to false
-		if (missile != null) {		// if there is a missile on screen
+		boolean collision = false;		// always set to false
+		if (missile != null) {			// if there is a missile on screen
 			if (missile.collision(entity)) {
 				collision = true;	// yield true
 				missile = null;		// dismiss missile from screen

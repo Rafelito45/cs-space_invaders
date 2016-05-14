@@ -41,7 +41,7 @@ public class Missile extends Entity {
 		}
 		this.x = x;		// x coordinate of firing object
 		this.y = y;		// y coordinate of firing object
-		this.vel = vel;	// velocity of missile
+		this.vel = vel;		// velocity of missile
 	}
 	
 	/**
@@ -65,8 +65,8 @@ public class Missile extends Entity {
 	 */
 	@Override
 	public boolean collision(Entity entity) {
-		int missile_x = x;						// x coordinate of missile
-		int missile_y = y;						// y coordinate of missile
+		int missile_x = x;				// x coordinate of missile
+		int missile_y = y;				// y coordinate of missile
 		// tests bottom end of missile instead
 		if (entity instanceof Player) {
 			missile_x = x + getWidth();
@@ -74,8 +74,8 @@ public class Missile extends Entity {
 		}
 		int entity_x = entity.getX();			// x coordinate of entity
 		int entity_y = entity.getY();			// y coordinate of entity
-		int entity_width = entity.getWidth();	// width of entity
-		int entity_height = entity.getHeight();	// height of entity
+		int entity_width = entity.getWidth();		// width of entity
+		int entity_height = entity.getHeight();		// height of entity
 		// returns result of comparison
 		return (missile_x > entity_x && missile_x < entity_x + entity_width &&
 				missile_y > entity_y && missile_y < entity_y + entity_height);

@@ -12,12 +12,10 @@ import spaceinvaders.Game;
  */
 public class AlienShip extends SpaceShip {
 	private Random random = new Random();	// random object
-	private int shiftOffset = 0;			// keeps track of shifts
-	protected double lastMove = 0;			// move timer
-	private int n = 1;						// direction of shift
+	private int shiftOffset = 0;		// keeps track of shifts
+	protected double lastMove = 0;		// move timer
+	private int n = 1;			// direction of shift
 	private boolean attack;
-
-	//private boolean isBehind = false;
 	
 	/**
 	 * AlienShip constructor takes x and y coordinates.

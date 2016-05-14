@@ -25,19 +25,19 @@ import spaceinvaders.entity.Player;
  */
 public class Game extends Canvas implements Runnable {
 	private static final long serialVersionUID = 1L;
-	private static final String NAME = "Space Invaders";// window name
-	public static final int WIDTH = 256;				// 4:3 ratio
-	public static final int HEIGHT = 192;				// 4:3 ratio
+	private static final String NAME = "Space Invaders";	// window name
+	public static final int WIDTH = 256;			// 4:3 ratio
+	public static final int HEIGHT = 192;			// 4:3 ratio
 	
 	// boolean for pausing game
 	private volatile boolean running = false;
 	// Game class becomes a KeyListener of InputHandler class
 	private InputHandler input = new InputHandler(this);
 	
-	private Player player;						// player
-	private DLList[] aliens;					// list of aliens
-	private int alienCount;						// number of aliens on screen
-	private int score = 0;						// game score
+	private Player player;					// player
+	private DLList[] aliens;				// list of aliens
+	private int alienCount;					// number of aliens on screen
+	private int score = 0;					// game score
 	
 	/**
 	 * Game constructor.
@@ -90,8 +90,8 @@ public class Game extends Canvas implements Runnable {
 		AlienShip newAlien;		// temporary AlienShip reference
 		
 		player = new Player(input, 0);	// instantiate player
-		aliens = new DLList[10];			// instantiate array of singly linked lists ...
-										// ... each array will hold a list of four aliens in a column
+		aliens = new DLList[10];	// instantiate array of singly linked lists ...
+						// ... each array will hold a list of four aliens in a column
 		for (int i = 0; i < aliens.length; i++) {
 			aliens[i] = new DLList();	// singly linked list of four aliens will be created
 			for (int j = 0; j < 4; j++) {
@@ -112,8 +112,8 @@ public class Game extends Canvas implements Runnable {
 	 */
 	@Override
 	public void run() {
-		long lastTime = System.nanoTime();		// timer commences
-		final double fps = 60D;					// frames per second
+		long lastTime = System.nanoTime();	// timer commences
+		final double fps = 60D;			// frames per second
 		double unprocessed = 0;
 		double nsPerTick = 1000000000D / fps;
 		int frames = 0;
@@ -130,7 +130,7 @@ public class Game extends Canvas implements Runnable {
 			boolean shouldRender = true;
 			while (unprocessed >= 1) {
 				ticks++;
-				tick();				// update game assets
+				tick();			// update game assets
 				unprocessed -= 1;	// set delta back to zero seconds
 				shouldRender = true;
 			}
@@ -145,7 +145,7 @@ public class Game extends Canvas implements Runnable {
 			
 			if (shouldRender) {
 				frames++;
-				render();	// render game assets
+				render();		// render game assets
 			}
 			
 			// keeps track of ticks and frames per second in milliseconds
@@ -170,10 +170,10 @@ public class Game extends Canvas implements Runnable {
 		
 		// updates all alien objects
 		for (int i = 0; i < aliens.length; i++) {
-			node = aliens[i].getHead();						// begin with head of list
+			node = aliens[i].getHead();			// begin with head of list
 			for (int j = 0; j < aliens[i].size(); j++) {	// size of particular list
-				node.getData().tick();						// tick alien within node
-				node = node.getNext();						// proceed to next node
+				node.getData().tick();			// tick alien within node
+				node = node.getNext();			// proceed to next node
 			}
 		}
 		
@@ -181,23 +181,23 @@ public class Game extends Canvas implements Runnable {
 		for (int i = 0; i < aliens.length; i++) {
 			node = aliens[i].getHead();		// begin with head of list
 			for (int j = 0; j < aliens[i].size(); j++) {	// size of particular list
-				alien = (AlienShip) node.getData();			// cast to AlienShip in order to access methods
+				alien = (AlienShip) node.getData();	// cast to AlienShip in order to access methods
 				
-				if (player.collision(alien)) {				// if player's missile hits alien
+				if (player.collision(alien)) {		// if player's missile hits alien
 					// foremost alien in list & not last -- prevent null reference
 					if (j == 0 && aliens[i].size() > 1) {
 						alien = (AlienShip) node.getNext().getData();	// reference next alien in column
-						alien.setAttack(true);							// set attack to true
+						alien.setAttack(true);				// set attack to true
 					}
 					
 					aliens[i].remove(node);	// remove eliminated alien
 					alienCount--;
-					score += 10;			// increment score
+					score += 10;		// increment score
 				}
 				else if (alien.collision(player)) {
 					player = null;	// player revival (potential expansion ...)*
 					System.out.println("You Lost.");
-					gameOver();		// terminates game
+					gameOver();	// terminates game
 				}
 				
 				node = node.getNext();	// traverse to next node
@@ -231,10 +231,10 @@ public class Game extends Canvas implements Runnable {
 		
 		ListNode node;		// temporary ListNode reference for list traversal
 		for (int i = 0; i < aliens.length; i++) {
-			node = aliens[i].getHead();						// begin with head of list
+			node = aliens[i].getHead();			// begin with head of list
 			for (int j = 0; j < aliens[i].size(); j++) {	// size of particular list
-				node.getData().render(g);					// render alien within node
-				node = node.getNext();						// traverse to next node
+				node.getData().render(g);		// render alien within node
+				node = node.getNext();			// traverse to next node
 			}
 		}
 		//////////////////////////////////////////

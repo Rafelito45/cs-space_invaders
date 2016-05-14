@@ -10,7 +10,7 @@ import spaceinvaders.InputHandler;
  *
  */
 public class Player extends SpaceShip {
-	private InputHandler input;				// KeyListener Class
+	private InputHandler input;	// KeyListener Class
 	
 	/**
 	 * Player constructor takes input from a client.
@@ -32,10 +32,10 @@ public class Player extends SpaceShip {
 	 * and fire missiles.
 	 */
 	public void tick() {
-		int xa = 0;					// x offset
-		if (input.left.down) xa--;	// x offset -> left
-		if (input.right.down) xa++;	// x offset -> right
-		move(xa);					// move method
+		int xa = 0;				// x offset
+		if (input.left.down) xa--;		// x offset -> left
+		if (input.right.down) xa++;		// x offset -> right
+		move(xa);				// move method
 		if (input.attack.down) attack();
 		if (missile != null) {
 			missile.tick();
